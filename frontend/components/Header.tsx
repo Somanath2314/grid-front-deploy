@@ -333,7 +333,8 @@ function SearchBar({ onSearch }: { onSearch: (query: string) => void }) {
     const previousCategoryPaths = JSON.parse(localStorage.getItem("previousCategoryPaths") || "[]")
     const contextCategoryPath = previousCategoryPaths.length > 0 ? previousCategoryPaths[0] : null
     
-    let url = `http://localhost:8000/autosuggest?q=${encodeURIComponent(query)}`
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+    let url = `${backendUrl}/autosuggest?q=${encodeURIComponent(query)}`
     if (contextCategoryPath) {
       url += `&context_category_path=${encodeURIComponent(JSON.stringify(contextCategoryPath))}`
     }

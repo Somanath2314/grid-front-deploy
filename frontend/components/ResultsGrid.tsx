@@ -64,7 +64,9 @@ export default function ResultsGrid({ query, filters, sort, userLat, userLon, on
     })
 
     console.log('Search params:', searchParams.toString())
-    fetch(`http://localhost:8000/search?${searchParams}`)
+    
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+    fetch(`${backendUrl}/search?${searchParams}`)
       .then(res => res.json())
       .then(data => {
         console.log('Received data:', data.results?.slice(0, 3).map((item: any) => ({ title: item.title, price: item.price })))
